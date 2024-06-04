@@ -22,11 +22,8 @@ import static com.empire.shipmanagement.infraestructure.adapter.out.persitence.e
 @Log4j2
 public class ShipPersistenceAdapter implements ShipBusinessPersistencePort {
     protected static final String ERROR_PERSISTING_THE_SHIP = "Error persisting the Ship with id: %s";
-
-    protected static final String ERROR_FINDING_THE_SHIP = "Error finding the Ship with id: %s";
     protected static final String ERROR_UPDATING_THE_SHIP_NOT_FOUND = "Error updating the Ship with id: %s Ship not found";
-
-    protected static final String ACCESS_LOG = "Access to the Persistance class for the method: %s";
+    protected static final String ACCESS_LOG = "Access to the Persistence class for the method: %s";
 
     @Autowired
     private ShipRepository shipRepository;
@@ -65,15 +62,6 @@ public class ShipPersistenceAdapter implements ShipBusinessPersistencePort {
         return Optional.ofNullable(shipRepository.findById(shipId)
                 .map(ShipEntityModelFactory::entityToModel)
                 .orElseThrow(() -> new PersistenceException(String.format(ERROR_UPDATING_THE_SHIP_NOT_FOUND, shipId))));
-    }
-
-    @Override
-    public String getShipStatus(Long shipId) {
-        log.debug(String.format(ACCESS_LOG, "getShipStatus"));
-        Ship ship = shipRepository.findById(shipId)
-                .map(ShipEntityModelFactory::entityToModel)
-                .orElseThrow(() -> new PersistenceException(String.format(ERROR_FINDING_THE_SHIP, shipId)));
-        return ship.getStatus().toString();
     }
 
     @Override

@@ -12,7 +12,6 @@ public interface ShipBusinessPersistencePort {
     Ship updateShip(Ship ship);
     void deleteShipById(Long shipId);
     Optional<Ship> getShipById(Long shipId);
-    String getShipStatus(Long shipId);
     boolean shipExist(Long shipId);
     Page<Ship> findShips(ShipFilter shipFilter);
 }
