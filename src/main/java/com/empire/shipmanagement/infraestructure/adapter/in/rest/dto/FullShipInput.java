@@ -28,9 +28,9 @@ public class FullShipInput extends ShipInput {
     private ShipStatus status;
 
     @NotEmpty(message = "The films are required.")
-    @Schema(name = "filmIds",
+    @Schema(name = "films",
             type = "Set<Long>",
             example = "[1, 2, 3]")
-    private Set<Long> filmIds;
+    private Set<Long> films;
 
 }

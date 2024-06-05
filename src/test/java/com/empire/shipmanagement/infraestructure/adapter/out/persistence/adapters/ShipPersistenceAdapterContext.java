@@ -10,6 +10,7 @@ import com.empire.shipmanagement.infraestructure.adapter.out.persitence.entity.F
 import com.empire.shipmanagement.infraestructure.adapter.out.persitence.entity.ShipEntity;
 import com.empire.shipmanagement.infraestructure.adapter.out.persitence.entity.ShipEntityFilterFactory;
 import com.empire.shipmanagement.infraestructure.adapter.out.persitence.entity.ShipEntityModelFactory;
+import com.empire.shipmanagement.infraestructure.adapter.out.persitence.repository.FilmsRepository;
 import com.empire.shipmanagement.infraestructure.adapter.out.persitence.repository.ShipRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,6 +26,8 @@ class ShipPersistenceAdapterContext {
     protected ShipPersistenceAdapter shipPersistenceAdapter;
     @Mock
     protected ShipRepository shipRepository;
+    @Mock
+    protected FilmsRepository filmsRepository;
     protected ShipInput shipInput;
     protected FullShipInput fullShipInput;
     protected ShipEntity shipEntity;
@@ -43,7 +46,7 @@ class ShipPersistenceAdapterContext {
     protected static final String ERROR_FINDING_SHIPS = "Error finding the Ships";
     protected static final String ERROR_UPDATING_THE_SHIP_NOT_FOUND = "Error updating the Ship with id: %s Ship not found";
     protected static final String ACCESS_LOG = "Access to the Persistence class for the method: %s";
-
+    protected static final String ERROR_UPDATING_THE_FILM_NOT_FOUND = "Error updating the Ship due to film with id: %s not found";
     @BeforeEach
     void setUp() {
         shipInput = this.buildShipInput();
@@ -68,7 +71,7 @@ class ShipPersistenceAdapterContext {
                 .type(TYPE)
                 .status(STATUS)
                 .name(NAME)
-                .filmIds(FILMS_ID)
+                .films(FILMS_ID)
                 .build();
     }
 
@@ -79,7 +82,7 @@ class ShipPersistenceAdapterContext {
                 .type(TYPE)
                 .status(STATUS)
                 .name(NAME)
-                //.films(Set.of(filmEntity))
+                .films(Set.of(filmEntity))
                 .build();
     }
     public  FilmEntity buildFilmEntity() {

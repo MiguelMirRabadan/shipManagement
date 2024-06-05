@@ -1,5 +1,6 @@
 package com.empire.shipmanagement.infraestructure.adapter.out.persitence.mapper;
 
+import com.empire.shipmanagement.infraestructure.adapter.in.rest.dto.ShipInput;
 import org.modelmapper.ModelMapper;
 
 import java.lang.reflect.ParameterizedType;
@@ -11,7 +12,6 @@ public abstract class DomainMapper<S, T> {
     public DomainMapper() {
         this.modelMapper = new ModelMapper();
     }
-
     public S toLocalModel(T target) {
         return modelMapper.map(target, getSourceClass());
     }

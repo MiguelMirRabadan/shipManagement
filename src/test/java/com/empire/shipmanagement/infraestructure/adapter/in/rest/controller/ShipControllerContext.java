@@ -59,7 +59,7 @@ class ShipControllerContext {
                 .type(TYPE)
                 .status(STATUS)
                 .name(NAME)
-                .filmIds(FILMS_ID)
+                .films(FILMS_ID)
                 .build();
     }
 

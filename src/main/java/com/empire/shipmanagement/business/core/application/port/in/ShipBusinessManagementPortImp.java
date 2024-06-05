@@ -46,10 +46,9 @@ public class ShipBusinessManagementPortImp implements ShipBusinessManagementPort
     @Override
     @Transactional
     public Ship updateShip(Ship ship) {
-        Ship currentShip = shipBusinessPersistencePort.getShipById(ship.getId()).orElseThrow(() ->
-                new ShipNotExistException(ship.getId()));
-
-
+        if(!shipBusinessPersistencePort.shipExist(ship.getId())){
+            throw new ShipNotExistException(ship.getId());
+        }
         return shipBusinessPersistencePort.updateShip(ship);
     }
 
@@ -98,13 +97,13 @@ public class ShipBusinessManagementPortImp implements ShipBusinessManagementPort
         return shipBusinessPersistencePort.updateShip(currentShip);
     }
 
+    //TODO: La cache, almacena en caso de error por X motivo causado, el resultado, si intentamos acceder
+    //  sin introducir dato que de error, retorna nada, ya que almacenó correctamente el valor vacio.
     @Override
-    @Cacheable(value = SHIP_INFO_CACHE, key = "#shipFilter.id", unless = "#result == null")
+    @Cacheable(value = SHIP_INFO_CACHE, key = "#shipFilter.id != null ? #shipFilter.id : #shipFilter.pageIndex", unless = "#result == null")
     public SearchResultDto getShipSearchResult(ShipFilter shipFilter) {
         return SearchResultDto.toDTO(findShips(shipFilter));
     }
-
-    //TODO: los campos pueden venir vacios, problema de integridad con los datos almacenados en cache
     public Page<Ship> findShips(ShipFilter shipFilter) {
         return shipBusinessPersistencePort.findShips(shipFilter);
     }

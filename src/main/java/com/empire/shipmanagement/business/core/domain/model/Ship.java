@@ -75,7 +75,7 @@ public class Ship {
                 ", type=" + type +
                 ", status=" + status +
                 ", description='" + description + '\'' +
-                ", films='" +  + '\'' +
+                ", films='" +  films + '\'' +
                 '}';
     }
 }

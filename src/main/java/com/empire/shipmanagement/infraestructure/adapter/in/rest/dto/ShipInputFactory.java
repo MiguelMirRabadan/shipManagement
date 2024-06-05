@@ -10,8 +10,4 @@ public class ShipInputFactory {
         }.toExternalModel(shipInput);
     }
 
-    public static Ship inputToModel(FullShipInput fullShipInput) {
-        return new DomainMapper<FullShipInput, Ship>() {
-        }.toExternalModel(fullShipInput);
-    }
 }

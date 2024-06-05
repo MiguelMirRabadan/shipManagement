@@ -3,8 +3,10 @@ package com.empire.shipmanagement.infraestructure.adapter.out.persitence.adapter
 import com.empire.shipmanagement.business.core.application.dto.ShipFilter;
 import com.empire.shipmanagement.business.core.application.port.out.ShipBusinessPersistencePort;
 import com.empire.shipmanagement.business.core.domain.model.Ship;
+import com.empire.shipmanagement.infraestructure.adapter.out.persitence.entity.FilmEntity;
 import com.empire.shipmanagement.infraestructure.adapter.out.persitence.entity.ShipEntity;
 import com.empire.shipmanagement.infraestructure.adapter.out.persitence.entity.ShipEntityModelFactory;
+import com.empire.shipmanagement.infraestructure.adapter.out.persitence.repository.FilmsRepository;
 import com.empire.shipmanagement.infraestructure.adapter.out.persitence.repository.ShipRepository;
 import jakarta.persistence.PersistenceException;
 import lombok.SneakyThrows;
@@ -13,7 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.empire.shipmanagement.infraestructure.adapter.out.persitence.adapter.ShipExampleFactory.buildPageable;
 import static com.empire.shipmanagement.infraestructure.adapter.out.persitence.entity.ShipEntityModelFactory.entityToModel;
@@ -24,9 +29,12 @@ public class ShipPersistenceAdapter implements ShipBusinessPersistencePort {
     protected static final String ERROR_PERSISTING_THE_SHIP = "Error persisting the Ship with id: %s";
     protected static final String ERROR_UPDATING_THE_SHIP_NOT_FOUND = "Error updating the Ship with id: %s Ship not found";
     protected static final String ACCESS_LOG = "Access to the Persistence class for the method: %s";
+    protected static final String ERROR_UPDATING_THE_FILM_NOT_FOUND = "Error updating the Ship due to film with id: %s not found";
 
     @Autowired
     private ShipRepository shipRepository;
+    @Autowired
+    private FilmsRepository filmRepository;
 
     @Override
     public Ship createShip(Ship newShip) {
@@ -44,11 +52,20 @@ public class ShipPersistenceAdapter implements ShipBusinessPersistencePort {
     @Override
     public Ship updateShip(Ship ship) {
         log.debug(String.format(ACCESS_LOG, "updateShip"));
-        return shipRepository.findById(ship.getId())
-                .map(shipEntity -> persistShipEntity(modelToEntity(ship)))
-                .map(ShipEntityModelFactory::entityToModel)
+        Set<FilmEntity> filmEntities= null;
+        shipRepository.findById(ship.getId())
                 .orElseThrow(() -> new PersistenceException(
                         String.format(ERROR_UPDATING_THE_SHIP_NOT_FOUND, ship.getId())));
+        if(Objects.nonNull(ship.getFilms()) && !ship.getFilms().isEmpty()){
+            filmEntities = ship.getFilms().stream()
+                    .map(filmId -> filmRepository.findById(filmId)
+                                    .orElseThrow(() -> new PersistenceException(String.format(
+                                            ERROR_UPDATING_THE_FILM_NOT_FOUND, filmId))))
+                    .collect(Collectors.toSet());
+        }
+        ShipEntity shipEntity = modelToEntity(ship);
+        shipEntity.setFilms(filmEntities);
+        return  entityToModel(persistShipEntity(shipEntity));
     }
 
     @Override
