@@ -72,7 +72,7 @@ class ShipControllerTest extends ShipControllerContext{
     }
 
     @Test
-    void findUsersThrowSameExceptionAsPort() {
+    void findShipsThrowSameExceptionAsPort() {
         String exceptionMessage = "exceptionMessage";
         when(shipBusinessManagementPort.getShipSearchResult(any())).thenThrow(new RuntimeException(exceptionMessage));
 

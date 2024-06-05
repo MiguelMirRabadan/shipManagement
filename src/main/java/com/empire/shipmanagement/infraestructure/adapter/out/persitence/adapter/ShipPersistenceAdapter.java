@@ -75,7 +75,7 @@ public class ShipPersistenceAdapter implements ShipBusinessPersistencePort {
         log.debug(String.format(ACCESS_LOG, "findShips"));
         return Optional.of(shipFilter)
                 .map(ShipExampleFactory::buildExample)
-                .map(mobileEntityExample -> shipRepository.findAll(mobileEntityExample, buildPageable(shipFilter)))
+                .map(shipEntityExample -> shipRepository.findAll(shipEntityExample, buildPageable(shipFilter)))
                 .map(page -> page.map(ShipEntityModelFactory::entityToModel))
                 .orElseGet(Page::empty);
     }

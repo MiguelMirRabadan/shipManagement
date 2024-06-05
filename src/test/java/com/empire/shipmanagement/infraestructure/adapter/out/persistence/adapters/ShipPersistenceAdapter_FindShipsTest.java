@@ -24,7 +24,7 @@ class ShipPersistenceAdapter_FindShipsTest extends ShipPersistenceAdapterContext
     }
 
     @Test
-    void findUsersThrowsSameExceptionAsRepository(){
+    void findShipsThrowsSameExceptionAsRepository(){
 
         ShipFilter filter = ShipFilter.builder().pageIndex(0).pageSize(10).build();
         when(shipRepository.findAll(any(Example.class),any(Pageable.class))).thenThrow(new RuntimeException(ERROR_FINDING_SHIPS));
