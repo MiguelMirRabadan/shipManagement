@@ -13,18 +13,14 @@ import com.empire.shipmanagement.infraestructure.adapter.in.rest.dto.ShipInput;
 import com.empire.shipmanagement.infraestructure.adapter.in.rest.dto.ShipInputFactory;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-
-import static com.empire.shipmanagement.infraestructure.adapter.config.CacheConfig.SHIP_INFO_CACHE;
 
 @RestController
 @Log4j2

@@ -7,19 +7,18 @@ import com.empire.shipmanagement.business.core.application.exception.ShipAlready
 import com.empire.shipmanagement.business.core.application.exception.ShipAlreadyCurrentTypeException;
 import com.empire.shipmanagement.business.core.application.exception.ShipNotExistException;
 import com.empire.shipmanagement.business.core.application.port.out.ShipBusinessPersistencePort;
+import com.empire.shipmanagement.business.core.domain.model.EventType;
 import com.empire.shipmanagement.business.core.domain.model.Ship;
 import com.empire.shipmanagement.business.core.domain.model.ShipStatus;
 import com.empire.shipmanagement.business.core.domain.model.ShipType;
+import com.empire.shipmanagement.business.core.domain.port.io.EventPublisher;
 import jakarta.transaction.Transactional;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 import static com.empire.shipmanagement.infraestructure.adapter.config.CacheConfig.SHIP_INFO_CACHE;
 
@@ -29,6 +28,8 @@ public class ShipBusinessManagementPortImp implements ShipBusinessManagementPort
 
     @Autowired
     private ShipBusinessPersistencePort shipBusinessPersistencePort;
+    @Autowired
+    private EventPublisher eventPublisher;
 
     @Override
     @Transactional
@@ -37,7 +38,9 @@ public class ShipBusinessManagementPortImp implements ShipBusinessManagementPort
         if (shipBusinessPersistencePort.shipExist(newShip.getId())) {
             throw new ShipActiveAlreadyExistException(newShip.getId());
         }
-        return shipBusinessPersistencePort.createShip(newShip.initNewShip());
+        Ship createdShip =  shipBusinessPersistencePort.createShip(newShip.initNewShip());
+        eventPublisher.publish(null, EventType.CREATED, createdShip);
+        return createdShip;
     }
 
     @Override

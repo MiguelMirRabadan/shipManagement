@@ -1,0 +1,20 @@
+In case that Docker-compose do not create the Broker correctly, you should execute these steps:
+
+If you don't have the plugging of docker on Intellj to work with the containers throw the IDE,
+must go to your docker desktop, go to the container Kafka > Broker > and go the the "Exec" window to execute the next
+commands:
+
+ 1-   kafka-topics --create --topic SHIPS --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+ 2-   kafka-topics --describe --topic SHIPS --bootstrap-server localhost:9092
+
+ 3-   kafka-console-consumer --bootstrap-server localhost:9092 --topic SHIPS --from-beginning
+
+
+ The first one is for create the Topic that we need to retrieve the message pushed.
+
+ The second one is for check if we have correctly the topic create
+
+ The last One is for consult the message that we consume. Need push it before to exec this one.
+
+ For push a message, you need create a new ship.
