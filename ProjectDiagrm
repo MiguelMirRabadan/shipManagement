@@ -1,0 +1,77 @@
+src
+└── main
+    └── java
+        └── com
+            └── empire
+                └── shipmanagement
+                    ├── business
+                    │   └── core
+                    │       ├── application
+                    │       │   ├── event
+                    │       │   │   └── Event.java
+                    │       │   ├── dto
+                    │       │   │   └── SearchResultDto.java
+                    │       │   │   └── ShipFilter.java
+                    │       │   ├── exception
+                    │       │   │   └── ShipActiveAlreadyExistException.java
+                    │       │   │   └── ShipAlreadyCurrentStatusException.java
+                    │       │   │   └── ShipAlreadyCurrentTypeException.java
+                    │       │   │   └── ShipNotExistException.java
+                    │       │   ├── port
+                    │       │   │   └── in
+                    │       │   │       └── ShipBusinessManagementPort.java
+                    │       │   │       └── ShipBusinessManagementPortImp.java
+					│		│	│	└── out
+                    │       │   │       └── ShipBusinessPersistencePort.java
+                    │       │   └── service
+                    │       │       └── ShipDomainManagementPortImp.java
+                    │       └── domain
+                    │           ├── model
+                    │           │   └── Ship.java
+                    │           │   └── ShipStatus.java
+                    │           │   └── ShipType.java
+                    │           │   └── EventType.java
+                    │           └── port
+                    │               └── io
+                    │                   └── ShipDomainManagementPort.java
+                    │                   └── EventPublisher.java
+                    └── infraestructure
+                        └── adapter
+                            ├── in
+                            │   └── rest
+                            │       └── controller
+                            │           └── ShipController.java
+                            │       └── dto
+                            │           └── ShipInput.java
+                            │           └── ShipInputFactory.java
+                            │       └── aspect
+                            │           └── LogIfNegative.java
+                            │           └── NegativeValueLoggingAspect.java
+                            │       └── api
+                            │           └── ShipApi.java
+                            │       └── exception
+                            │           └── ResourceNotFoundException.java
+                            │           └── RestResponseEntityExceptionHandler.java
+                            ├── out
+                            │   │── persistence
+                            │   │   └── adapter
+                            │   │       └── ShipPersistenceAdapter.java
+                            │   │       └── ShipExampleFactory.java
+                            │   │   └── entity
+                            │   │       └── ShipEntity.java
+                            │   │       └── FilmEntity.java
+                            │   │       └── FilmType.java
+						 	│	│		└── ShipEntityModelFactory.java
+						 	│	│		└── ShipEntityFilterFactory.java
+                            │   │   └── repository
+                            │   │       └── ShipRepository.java
+                            │   │   └── mapper
+                            │   │       └── DomainMapper.java
+                            │   │       └── ShipFilterMapper.java
+                            │   │       └── ShipMapper.java
+                            │   └── messaging
+                            │        └── KafkaEventPublisher.java
+                            └── config
+                               └── KafkaProducerConfig.java
+                               └── CacheConfig.java
+                               └── SchemaGenerationConfig
