@@ -5,7 +5,9 @@ import com.empire.shipmanagement.business.core.domain.model.ShipStatus;
 import com.empire.shipmanagement.infraestructure.adapter.in.rest.dto.ShipInputFactory;
 import jakarta.persistence.PersistenceException;
 import org.junit.jupiter.api.Test;
+
 import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;

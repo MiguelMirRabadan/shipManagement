@@ -1,6 +1,5 @@
 package com.empire.shipmanagement.infraestructure.adapter.out.persitence.entity;
 
-import com.empire.shipmanagement.business.core.domain.model.Ship;
 import com.empire.shipmanagement.business.core.domain.model.ShipStatus;
 import com.empire.shipmanagement.business.core.domain.model.ShipType;
 import jakarta.persistence.*;

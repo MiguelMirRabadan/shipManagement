@@ -4,7 +4,9 @@ import com.empire.shipmanagement.business.core.application.dto.ShipFilter;
 import com.empire.shipmanagement.infraestructure.adapter.out.persitence.entity.ShipEntity;
 import com.empire.shipmanagement.infraestructure.adapter.out.persitence.entity.ShipEntityFilterFactory;
 import org.springframework.data.domain.*;
+
 import java.util.Optional;
+
 import static com.empire.shipmanagement.infraestructure.adapter.out.persitence.entity.ShipEntity.*;
 
 

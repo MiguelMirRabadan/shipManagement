@@ -1,10 +1,9 @@
 package com.empire.shipmanagement.infraestructure.adapter.in.rest.dto;
 
-import com.empire.shipmanagement.business.core.domain.model.Ship;
 import com.empire.shipmanagement.business.core.domain.model.ShipStatus;
-import com.empire.shipmanagement.business.core.domain.model.ShipType;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

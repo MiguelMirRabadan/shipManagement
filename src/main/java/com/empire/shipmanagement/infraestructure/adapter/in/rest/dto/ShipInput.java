@@ -1,7 +1,6 @@
 package com.empire.shipmanagement.infraestructure.adapter.in.rest.dto;
 
 import com.empire.shipmanagement.business.core.domain.model.ShipType;
-import com.empire.shipmanagement.infraestructure.adapter.in.rest.aspect.LogIfNegative;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;

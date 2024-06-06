@@ -9,7 +9,6 @@ import com.empire.shipmanagement.infraestructure.adapter.out.persitence.entity.S
 import com.empire.shipmanagement.infraestructure.adapter.out.persitence.repository.FilmsRepository;
 import com.empire.shipmanagement.infraestructure.adapter.out.persitence.repository.ShipRepository;
 import jakarta.persistence.PersistenceException;
-import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

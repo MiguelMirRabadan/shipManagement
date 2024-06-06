@@ -1,6 +1,5 @@
 package com.empire.shipmanagement.infraestructure.adapter.out.persitence.mapper;
 
-import com.empire.shipmanagement.infraestructure.adapter.in.rest.dto.ShipInput;
 import org.modelmapper.ModelMapper;
 
 import java.lang.reflect.ParameterizedType;
